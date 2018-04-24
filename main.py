@@ -8,5 +8,5 @@ if __name__ == '__main__':
 def main():
 	initial = Initial()
 	env = SimuEnv(initial)
-	env.setting()
+	env.setting(follow_type = 'PID_follow')
 	env.start()
