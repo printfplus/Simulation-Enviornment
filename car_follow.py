@@ -126,11 +126,12 @@ class x_distribution():
 			for rrx in range(self.range_rate_split):
 				self.possibility_table.at[self.range_list[rx][0],self.range_rate_list[rrx][0]] = self.range_list[rx][1]*self.range_rate_list[rrx][1]
 		print(self.possibility_table)
+		self.possibility_table.to_csv('possibility_table.csv')
 
 
 
 
 
-A = x_distribution(60,20,0,100,20,5,0,40)
+A = x_distribution(60,20,0,100,-10,5,-20,20)
 #print(A.range_rate_list)
 
