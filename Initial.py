@@ -21,9 +21,9 @@ class Initial():
 
 	def set_state(self,range_error,range_rate_error):
 		self.x_prev = range_error
-		self.v_prev = 10+range_rate_error
+		self.v_prev = 20+range_rate_error
 		self.x_back = 0
-		self.v_back = 10
+		self.v_back = 20
 
 	def save(self,id_number):
 		file = open('Initial_'+str(id_number)+'.json','w',encoding='utf-8')  

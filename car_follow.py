@@ -2,7 +2,8 @@ import numpy
 
 def pid_follow(x1,v1,x2,v2,k1 = 1.12,k2 = 1.70,amax = 3,amin = -3):
 	headway = 1.4
-	range_error = x1-x2-headway*v2
+	#range_error = x1-x2-headway*v2]
+	range_error = x1-x2-50
 	range_rate_error = v1-v2
 	a = k1*range_error+k2*range_rate_error
 
@@ -38,7 +39,7 @@ def reward_and_done(x1,v1,x2,v2,stepnum):
 		done = 0
 	return reward,done
 
-def update(x,v,a,vmax = numpy.inf,vmin = 0,dt = 1):
+def update(x,v,a,vmax = 40,vmin = 0,dt = 1):
 	if v == vmax and a > 0:
 		a = 0
 	elif v == vmin and a < 0:
@@ -57,11 +58,12 @@ def random_effect(a,random_type = 'normal',random_parameter = [0,0.55]):
 	if random_type == 'normal':
 		return numpy.round(numpy.random.normal(random_parameter[0],random_parameter[1],1),2)[0]
 
-def pid_follow_with_random(x1,v1,x2,v2,k1 = 1.12,k2 = 1.70,amax = 3,amin = -3,newparameter = []):
+def pid_follow_with_random(x1,v1,x2,v2,k1 = 1.12,k2 = 1.70,amax = 3,amin = -3,newparameter = [],random = 'on'):
 	a = pid_follow(x1,v1,x2,v2,k1 = k1,k2 = k1,amax = amax,amin = amin)
-	theta = 0.55
-	a = random_effect(a,random_type='normal',random_parameter=[a,theta])
-
+	if random == 'on':
+		theta = 0
+		a = random_effect(a,random_type='normal',random_parameter=[a,theta])
+		
 	if a > amax:
 		a = amax
 	elif a < amin:
