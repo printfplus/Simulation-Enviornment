@@ -15,7 +15,7 @@ def pid_follow(x1,v1,x2,v2,k1 = 1.12,k2 = 1.70,amax = 3,amin = -3):
 
 def car_follow(x1,v1,x2,v2,amax = 3,amin = -3):
 	PAR = 500
-	objective_a = (PAR*(v2)**0.6)*(v2-v1)/((abs(x2-x1))**2.4*np.sign(x2-x1))
+	objective_a = (PAR*(v2)**0.6)*(v2-v1)/((abs(x2-x1))**2.4*numpy.sign(x2-x1))
 	if objective_a > amax:
 		objective_a = amax
 	elif objective_a < amin:
