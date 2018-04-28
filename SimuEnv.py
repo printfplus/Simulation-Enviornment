@@ -132,10 +132,6 @@ class SimuEnv():
 
 		return df,toc-tic
 
-	def plot(self):
-		plt.plot()
-
-
 
 
 
