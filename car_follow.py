@@ -134,3 +134,4 @@ class x_distribution():
 
 A = x_distribution(60,20,0,100,-10,5,-20,20)
 
+#print("hello,world")
