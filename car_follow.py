@@ -129,9 +129,6 @@ class x_distribution():
 		self.possibility_table.to_csv('possibility_table.csv')
 
 
-
-
-
 A = x_distribution(60,20,0,100,-10,5,-20,20)
 
 #print("hello,world")
