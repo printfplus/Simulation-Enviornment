@@ -77,7 +77,8 @@ def pid_follow_with_random(x1,v1,x2,v2,k1 = 1.12,k2 = 1.70,amax = 3,amin = -3,ne
 
 
 def get_series(lb,ub,step):
-	series = [lb+i*((ub-lb)/step) for i in range(step+1)]
+	series = [round(lb+i*((ub-lb)/step),1) for i in range(step+1)]
+	#print(series)
 	return series
 
 def get_possilbility(x,mu,lb,ub,split_whole,split_num):
@@ -94,8 +95,8 @@ def get_possilbility(x,mu,lb,ub,split_whole,split_num):
 class x_distribution():
 
 	def __init__(self,range_x,range_mu,range_lb,range_ub,range_rate_x,range_rate_mu,range_rate_lb,range_rate_ub):
-		self.range_split = 10
-		self.range_rate_split = 10
+		self.range_split = 50
+		self.range_rate_split = 40
 		self.range_x = range_x
 		self.range_mu = range_mu
 		self.range_lb = range_lb
@@ -125,10 +126,17 @@ class x_distribution():
 		for rx in range(self.range_split):
 			for rrx in range(self.range_rate_split):
 				self.possibility_table.at[self.range_list[rx][0],self.range_rate_list[rrx][0]] = self.range_list[rx][1]*self.range_rate_list[rrx][1]
-		print(self.possibility_table)
+		print(self.possibility_table.columns)
 		self.possibility_table.to_csv('possibility_table.csv')
 
+	def calculatepxb(self,collision_file = 'new.csv'):
+		self.collision_table = pd.read_csv(collision_file)
+		#print(self.collision_table['100'])
 
-A = x_distribution(60,20,0,100,-10,5,-20,20)
+
+
+
+#A = x_distribution(60,20,0,100,-10,5,-20,0)
+#A.calculatepxb()
 
 #print("hello,world")

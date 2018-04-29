@@ -1,4 +1,4 @@
-from Initial import Initial
+from Initial import *
 from A_Series import A_Series
 import json
 from car_follow import *
@@ -7,18 +7,12 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import time
 
-car_follow_Dic = {
-    0: "None",
-    1: "PID_follow",
-    2: "LEFT",
-    3: "RIGHT"
-}
-
 Test_Step = 100
 
 class SimuEnv():
 	"""docstring for SimuEnv"""
 	def __init__(self, initial):
+		print("envstart")
 		self.initial = initial
 		self.a_back_series = [0 for x in range(self.get_step())]
 		self.car_follow_type = 0
@@ -109,7 +103,7 @@ class SimuEnv():
 		#print(range_rate_error_series)
 		whole_serie = []
 		for RE in range(len(range_error_series)):
-			print(RE)
+			#print(RE)
 			RRE_serie = []
 			for RRE in range(len(range_rate_error_series)):
 				if random == 'off':
@@ -146,7 +140,7 @@ class SimuEnv():
 I = Initial(step = 300,dt = 0.1)
 env = SimuEnv(initial = I)
 env.setting(1)
-
+print("hello")
 whole_serie,whole_time = env.start(rlb = 0,rub = 100,rstep = 50,rrlb = -20,rrub = 0,rrstep = 40,random = 'off')
 whole_serie.to_csv('new.csv')
 #print(whole_serie)

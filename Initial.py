@@ -4,6 +4,7 @@ import json
 class Initial():
 
 	def __init__(self,step = 30,dt = 1):
+		print("starting initial")
 		self.x_prev = 100
 		self.v_prev = 25
 		self.x_back = 0
@@ -11,6 +12,7 @@ class Initial():
 		self.step = step
 		self.dt = dt
 		self.a_prev_series = [0 for x in range(step)]
+		print("initialize over")
 
 	def info2list(self):
 		data = [self.x_prev,self.v_prev,self.x_back,self.v_back,self.step,self.dt,self.a_prev_series]
