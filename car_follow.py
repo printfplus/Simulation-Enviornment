@@ -85,8 +85,6 @@ def get_possilbility(x,mu,lb,ub,split_whole,split_num):
 	
 	split_value = lb+(ub-lb)*split_num/split_whole
 	split_value_plus = lb+(ub-lb)*(split_num+1)/split_whole
-	#print(split_value)
-	#print(split_value_plus)
 	whole_possibility = st.norm(x,mu).cdf(ub)-st.norm(x,mu).cdf(lb)
 	one_possibility = scipy.stats.norm(x,mu).cdf(split_value_plus)-scipy.stats.norm(x,mu).cdf(split_value)
 	return one_possibility/whole_possibility
@@ -126,17 +124,22 @@ class x_distribution():
 		for rx in range(self.range_split):
 			for rrx in range(self.range_rate_split):
 				self.possibility_table.at[self.range_list[rx][0],self.range_rate_list[rrx][0]] = self.range_list[rx][1]*self.range_rate_list[rrx][1]
-		print(self.possibility_table.columns)
 		self.possibility_table.to_csv('possibility_table.csv')
 
 	def calculatepxb(self,collision_file = 'new.csv'):
 		self.collision_table = pd.read_csv(collision_file)
-		#print(self.collision_table['100'])
+		pb = 0
+		for rx in range(1,51):
+			for rrx in range(1,41):
+				print(rx)
+				print(rrx)
+				onetable = self.possibility_table.at[rx,rrx]
+				pb = pb+self.possibility_table.ix[rx,rrx]*self.collision_table.ix[rx,rrx]
+		print(pb)
 
 
 
 
-#A = x_distribution(60,20,0,100,-10,5,-20,0)
-#A.calculatepxb()
 
-#print("hello,world")
+A = x_distribution(60,20,0,100,-10,5,-20,0)
+A.calculatepxb()

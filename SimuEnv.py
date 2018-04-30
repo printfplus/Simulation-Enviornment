@@ -61,10 +61,8 @@ class SimuEnv():
 		if savefig == 'on':
 				x1_list = [x1]
 				v1_list = [v1]
-				#a1_list = [self.get_a1(0)]
 				x2_list = [x2]
 				v2_list = [v2]
-				#a2_list = [pid_follow_with_random(x1,v1,x2,v2,random = random)]
 
 		for i in range(step):
 
@@ -86,7 +84,6 @@ class SimuEnv():
 		if savefig == 'on':
 			plt.plot(x1_list)
 			plt.plot(x2_list)
-			#plt.plot(v1_list)
 			plt.plot(v2_list)
 
 
@@ -120,7 +117,7 @@ class SimuEnv():
 					RRE_serie.append(self.collision_rate)		
 			whole_serie.append(RRE_serie)
 
-		df = pd.DataFrame(whole_serie,index=range_error_series,columns=range_rate_error_series)
+		df = pd.DataFrame(whole_serie,index=list(map(str,range_error_series)),columns=list(map(str,range_rate_error_series)))
 		
 		toc = time.time()
 
@@ -143,13 +140,10 @@ env.setting(1)
 print("hello")
 whole_serie,whole_time = env.start(rlb = 0,rub = 100,rstep = 50,rrlb = -20,rrub = 0,rrstep = 40,random = 'off')
 whole_serie.to_csv('new.csv')
-#print(whole_serie)
 print("using "+str(whole_time)+" seconds")
 
 env.set_state(100,-17)
 env.simulate(display = 'off',savefig = 'on')
-#print(env.a_back_series)
-#print(env.collision_flag)
 plt.plot(env.a_back_series)
 plt.legend(labels = ['x1', 'x2','v2','a1'], loc = 'best')
 plt.show()

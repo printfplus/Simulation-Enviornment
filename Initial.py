@@ -50,3 +50,4 @@ class Initial():
 I = Initial()
 I.save(63)
 I.load(63)
+print("hello,world")
