@@ -3,18 +3,20 @@ clear;
 
 global v1;
 global v2;
+global omega;
+omega = 10;
 v2 = 20;
 global dt;
 dt = 1;
 global STEP;
-STEP = 30;
+STEP = 10;
 global vmax;
 global vmin;
 vmax = 40;
 vmin = 0;
 
-range = 60;
-range_rate = -10;
+range = 100;
+range_rate = 0;
 range_lb = 0;
 range_ub = 100;
 range_rate_lb = -20;
@@ -31,4 +33,5 @@ problem = createOptimProblem('fmincon','x0',x0,'objective',handle,...
     'lb',LB,'ub',UB,'Aineq',[],'bineq',[], 'Aeq',[], 'beq',[],'options',optimset('Algorithm','SQP','Disp','none'));
 gs = GlobalSearch;
 xgs = run(gs,problem);
+f = value_function(xgs)
 
