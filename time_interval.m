@@ -1,9 +1,11 @@
 function f = time_interval( x1,x2,v1,v2)
-global omega;
-if x1 > x2+1
-    f = -(v2-v1)/(x1-x2);
+
+if x1 > x2 && v2 > v1
+    f = (x1-x2)/(v2-v1);
+elseif v1 >= v2
+    f = 65536;
 else
-    f = -100000;
+    f = 0;
 end
 end
 
