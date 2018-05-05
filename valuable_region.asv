@@ -4,7 +4,7 @@ nowdata = csvread('region_data.csv');
 global v1;
 global v2;
 global omega;
-omega = 10;
+omega = 0.6;
 v2 = 20;
 global dt;
 dt = 1;
@@ -16,13 +16,17 @@ vmax = 40;
 vmin = 0;
 
 table = csvread('new.csv');
-figure;
+
 x_label = table(1,:);
 x_label(1)=[];
 x_label(size(x_label,2))=[];
 y_label = table(:,1);
 y_label(1)=[];
 y_label(size(y_label,1))=[];
+x_label(size(x_label,2)) = [];
+y_label(size(y_label,1)) = [];
+
+
 range = 100;
 range_rate = 0;
 range_lb = 0;
@@ -38,19 +42,25 @@ UB = [range_ub,range_rate_ub];
 
 handle = @value_function;
 problem = createOptimProblem('fmincon','x0',x0,'objective',handle,...
-    'lb',LB,'ub',UB,'Aineq',[],'bineq',[], 'Aeq',[], 'beq',[],'options',optimset('Algorithm','SQP','Disp','none'));
+    'lb',LB,'ub',UB,'Aineq',[],'bineq',[], 'Aeq',[], 'beq',[],'options',optimset('Algorithm','SQP','Disp','none'),);
 gs = GlobalSearch;
-xgs = run(gs,problem);
-xgs2 = run(gs,problem);
-nowdata = [nowdata;xgs;xgs2];
-nowdata = round(nowdata,1);
+
 csvwrite('region_data.csv',nowdata)
 value_table = csvread('Pxib_table.csv');
-x_label(1,size(x_label,2)) = [];
-y_la
 
+for i = 1:4
+    xgs = run(gs,problem);
+    nowdata = [nowdata;xgs];
+    nowdata = round(nowdata,1);
+end
 [x,y] = meshgrid(x_label,y_label);
+for i = 1:size(nowdata,1)
+    range_tmp = nowdata(i,1);
+    range_rate_tmp = nowdata(i,2);
+    range_num = find_num(range_tmp,y_label);
+    range_rate_num = find_num(range_rate_tmp,x_label);
+    value_table(range_num,range_rate_num) = 0.01;
+end
 surf(x,y,value_table);
-%plot(nowdata(:,1),nowdata(:,2));
 f = value_function(xgs);
 

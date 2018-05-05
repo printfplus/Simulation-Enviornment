@@ -7,6 +7,6 @@ function [f] = space_punish(x)
     if now_length < 20
         f = 0;
     else
-        f = now_length;
+        f = now_length-20;
     end
 end

@@ -1,6 +1,8 @@
 clear;
 %clc;
-nowdata = csvread('region_data.csv');
+
+nowdata = [];
+%nowdata = csvread('region_data.csv');
 global v1;
 global v2;
 global omega;
@@ -43,16 +45,17 @@ UB = [range_ub,range_rate_ub];
 handle = @value_function;
 problem = createOptimProblem('fmincon','x0',x0,'objective',handle,...
     'lb',LB,'ub',UB,'Aineq',[],'bineq',[], 'Aeq',[], 'beq',[],'options',optimset('Algorithm','SQP','Disp','none'));
-gs = GlobalSearch;
+gs = GlobalSearch('FunctionTolerance',10);
 
-csvwrite('region_data.csv',nowdata)
+
 value_table = csvread('Pxib_table.csv');
 
-for i = 1:4
+for i = 1:50
     xgs = run(gs,problem);
     nowdata = [nowdata;xgs];
     nowdata = round(nowdata,1);
 end
+csvwrite('region_data.csv',nowdata)
 [x,y] = meshgrid(x_label,y_label);
 for i = 1:size(nowdata,1)
     range_tmp = nowdata(i,1);
