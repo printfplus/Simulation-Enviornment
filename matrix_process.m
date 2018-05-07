@@ -4,6 +4,6 @@ function [f] = matrix_process(matrix)
     [row,col] = find(f == 0);
     num = size(row,1);
     for i = 1:num
-        f(row(i),col(i)) = 1/num;
+        f(row(i),col(i)) = 0.1/num;
     end
 end

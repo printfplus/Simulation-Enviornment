@@ -6,7 +6,7 @@ nowdata = csvread('region_data.csv');
 global v1;
 global v2;
 global omega;
-omega = 10;
+omega = 0.2;
 v2 = 20;
 global dt;
 dt = 1;
@@ -17,7 +17,8 @@ global vmin;
 vmax = 40;
 vmin = 0;
 
-table = csvread('new.csv');
+table = csvread('possibility_table.csv');
+
 
 x_label = table(1,:);
 x_label(1)=[];
@@ -25,8 +26,11 @@ x_label(size(x_label,2))=[];
 y_label = table(:,1);
 y_label(1)=[];
 y_label(size(y_label,1))=[];
-x_label(size(x_label,2)) = [];
-y_label(size(y_label,1)) = [];
+%x_label(size(x_label,2)) = [];
+%y_label(size(y_label,1)) = [];
+
+table(:,1) = [];
+table(1,:) = [];
 
 
 range = 100;
@@ -45,7 +49,7 @@ UB = [range_ub,range_rate_ub];
 handle = @value_function;
 problem = createOptimProblem('fmincon','x0',x0,'objective',handle,...
     'lb',LB,'ub',UB,'Aineq',[],'bineq',[], 'Aeq',[], 'beq',[],'options',optimset('Algorithm','SQP','Disp','none'));
-gs = GlobalSearch();
+gs = GlobalSearch('FunctionTolerance',10);
 
 
 value_table = csvread('Pxib_table.csv');
@@ -65,6 +69,7 @@ for i = 1:size(nowdata,1)
     range_rate_num = find_num(range_rate_tmp,x_label);
     value_table(range_num,range_rate_num) = table(range_num,range_rate_num);
 end
+value_table = matrix_process(value_table);
 surf(x,y,value_table);
 f = value_function(xgs);
 
