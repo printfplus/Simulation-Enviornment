@@ -2,7 +2,7 @@ clear;
 %clc;
 
 nowdata = [];
-%nowdata = csvread('region_data.csv');
+nowdata = csvread('region_data.csv');
 global v1;
 global v2;
 global omega;
@@ -45,14 +45,15 @@ UB = [range_ub,range_rate_ub];
 handle = @value_function;
 problem = createOptimProblem('fmincon','x0',x0,'objective',handle,...
     'lb',LB,'ub',UB,'Aineq',[],'bineq',[], 'Aeq',[], 'beq',[],'options',optimset('Algorithm','SQP','Disp','none'));
-gs = GlobalSearch('FunctionTolerance',10);
+gs = GlobalSearch();
 
 
 value_table = csvread('Pxib_table.csv');
+value_table(:,:) = 0;
 
-for i = 1:50
-    xgs = run(gs,problem);
-    nowdata = [nowdata;xgs];
+for i = 1:100
+    [xgs,fval] = run(gs,problem);
+    nowdata = [nowdata;[xgs,fval]];
     nowdata = round(nowdata,1);
 end
 csvwrite('region_data.csv',nowdata)
@@ -62,7 +63,7 @@ for i = 1:size(nowdata,1)
     range_rate_tmp = nowdata(i,2);
     range_num = find_num(range_tmp,y_label);
     range_rate_num = find_num(range_rate_tmp,x_label);
-    value_table(range_num,range_rate_num) = 0.01;
+    value_table(range_num,range_rate_num) = table(range_num,range_rate_num);
 end
 surf(x,y,value_table);
 f = value_function(xgs);
