@@ -16,8 +16,16 @@ global vmax;
 global vmin;
 vmax = 40;
 vmin = 0;
+global C;
+global Pb;
+Pb = 0.1;
 
 table = csvread('possibility_table.csv');
+
+safe_table = csvread('new.csv');
+safe_table(1,:) = [];
+safe_table(:,1) = [];
+
 
 
 x_label = table(1,:);
@@ -29,8 +37,9 @@ y_label(size(y_label,1))=[];
 %x_label(size(x_label,2)) = [];
 %y_label(size(y_label,1)) = [];
 
-table(:,1) = [];
 table(1,:) = [];
+table(:,1) = [];
+
 
 
 range = 100;
@@ -55,7 +64,7 @@ gs = GlobalSearch('FunctionTolerance',10);
 value_table = csvread('Pxib_table.csv');
 value_table(:,:) = 0;
 
-for i = 1:100
+for i = 1:5
     [xgs,fval] = run(gs,problem);
     nowdata = [nowdata;[xgs,fval]];
     nowdata = round(nowdata,1);
@@ -67,7 +76,7 @@ for i = 1:size(nowdata,1)
     range_rate_tmp = nowdata(i,2);
     range_num = find_num(range_tmp,y_label);
     range_rate_num = find_num(range_rate_tmp,x_label);
-    value_table(range_num,range_rate_num) = table(range_num,range_rate_num);
+    value_table(range_num,range_rate_num) = table(range_num,range_rate_num)*safe_table(range_num,range_rate_num);
 end
 value_table = matrix_process(value_table);
 surf(x,y,value_table);
