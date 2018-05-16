@@ -79,6 +79,8 @@ for i = 1:size(nowdata,1)
     value_table(range_num,range_rate_num) = table(range_num,range_rate_num)*safe_table(range_num,range_rate_num);
 end
 value_table = matrix_process(value_table);
-surf(x,y,value_table);
+%surf(x,y,value_table);
+imagesc(x_label,y_label,value_table);
+colorbar;
 f = value_function(xgs);
 
