@@ -18,7 +18,7 @@ vmax = 40;
 vmin = 0;
 global C;
 global Pb;
-Pb = 0.1;
+Pb = 0.03;
 
 table = csvread('possibility_table.csv');
 
@@ -71,16 +71,19 @@ for i = 1:5
 end
 csvwrite('region_data.csv',nowdata)
 [x,y] = meshgrid(x_label,y_label);
+num_value = 0;
 for i = 1:size(nowdata,1)
     range_tmp = nowdata(i,1);
     range_rate_tmp = nowdata(i,2);
     range_num = find_num(range_tmp,y_label);
     range_rate_num = find_num(range_rate_tmp,x_label);
     value_table(range_num,range_rate_num) = table(range_num,range_rate_num)*safe_table(range_num,range_rate_num);
+    num_value = num_value+value_table(range_num,range_rate_num);
 end
 value_table = matrix_process(value_table);
 %surf(x,y,value_table);
 imagesc(x_label,y_label,value_table);
+csvwrite('value_table_new2.csv',value_table);
 colorbar;
 f = value_function(xgs);
 
