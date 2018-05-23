@@ -32,6 +32,7 @@ for i = 1:size(cut_in_data,1)
     range_rate_num = floor((range_rate_tmp-range_rate_lb_int)/range_rate_interval)+1;
     CUT_in_table(range_num,range_rate_num) = CUT_in_table(range_num,range_rate_num)+1;
 end
+CUT_in_table = CUT_in_table/sum(sum(CUT_in_table));
 imagesc(range_list,range_rate_list,CUT_in_table);
 xlabel('range','FontSize',15);
 ylabel('range rate','FontSize',15);
