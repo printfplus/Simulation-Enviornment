@@ -15,13 +15,14 @@ global C;
 global Pb;
 Pb = 0.03;
 
-possibility_table = csvread('cutindata_biginterval.csv');
+possibility_table = csvread('NDD_P(x).csv');
 newtable = zeros(size(possibility_table));
 y_label = possibility_table(1,:);
 y_label(1) = [];
 possibility_table(1,:) = [];
 x_label = possibility_table(:,1);
 possibility_table(:,1) = [];
+max(max(possibility_table))
 num = 10;
 for i = 1:10
     range_num = randi([1,size(x_label,1)],1,1);

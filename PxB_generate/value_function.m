@@ -20,8 +20,9 @@ function [f] = value_function(x)
         car2 = update_state(car2(1),car2(2),a2,dt,vmin,vmax);
         value_list = [value_list,time_interval(car1(1),car2(1),car1(2),car2(2))];
     end
-    %f = min(value_list);%+omega*space_punish(x);
-    f = min(value_list);%+omega*NDD_space_punish(x);
+    [x_label,y_label,in_data] = table_read(csvread('possibility_table.csv'));
+    %f = min(value_list);
+    f = min(value_list)-get_continious_poss(x_label,y_label,in_data,x(1),x(2));
     
 
 
