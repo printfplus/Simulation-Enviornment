@@ -2,7 +2,7 @@ clear;
 %clc;
 
 nowdata = [];
-nowdata = csvread('region_data.csv');
+%nowdata = csvread('region_data.csv');
 global v1;
 global v2;
 global omega;
@@ -19,6 +19,9 @@ vmin = 0;
 global C;
 global Pb;
 Pb = 0.03;
+global x_label;
+global y_label;
+global table;
 
 table = csvread('possibility_table.csv');
 
@@ -50,7 +53,11 @@ value_table = csvread('Pxib_table.csv');
 value_table(:,:) = 0;
 
 for i = 1:5
-    [xgs,fval] = run(gs,problem);
+    %[xgs,fval] = run(gs,problem);
+    randrange = randi([range_lb,range_ub],1,1);
+    rangerangerate = -randi([abs(round((range_rate_ub))),abs(round(range_rate_lb))],1,1);
+    x0 = [randrange,rangerangerate];
+    [xgs,fval] = fmincon(handle,x0,[],[],[],[],LB,UB)
     nowdata = [nowdata;[xgs,fval]];
     nowdata = round(nowdata,1);
 end
@@ -60,8 +67,8 @@ num_value = 0;
 for i = 1:size(nowdata,1)
     range_tmp = nowdata(i,1);
     range_rate_tmp = nowdata(i,2);
-    range_num = find_num(range_tmp,y_label);
-    range_rate_num = find_num(range_rate_tmp,x_label);
+    range_num = find_num(range_tmp,x_label);
+    range_rate_num = find_num(range_rate_tmp,y_label);
     value_table(range_num,range_rate_num) = 1;
     num_value = num_value+value_table(range_num,range_rate_num);
 end

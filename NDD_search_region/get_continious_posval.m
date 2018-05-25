@@ -24,7 +24,7 @@ function f = get_continious_posval(x)
     possibility_table(1,:) = [];
     x_label = possibility_table(:,1);
     possibility_table(:,1) = [];
-    tmp_area = (x_lable(2)-x_label(1))*(y_lable(2)-y_label(1));
+    tmp_area = (x_label(2)-x_label(1))*(y_lable(2)-y_label(1));
     max_area = max(max(possibility_table))/tmp_area
 
     range_num = 0;
