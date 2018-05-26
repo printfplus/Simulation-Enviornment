@@ -2,7 +2,7 @@ clear;
 %clc;
 
 nowdata = [];
-nowdata = csvread('region_data.csv');
+%nowdata = csvread('region_data.csv');
 global v1;
 global v2;
 global omega;
@@ -22,9 +22,9 @@ Pb = 0.03;
 
 table = csvread('possibility_table.csv');
 
-safe_table = csvread('new.csv');
-safe_table(1,:) = [];
-safe_table(:,1) = [];
+%safe_table = csvread('new.csv');
+%safe_table(1,:) = [];
+%safe_table(:,1) = [];
 
 
 
@@ -77,7 +77,7 @@ for i = 1:size(nowdata,1)
     range_rate_tmp = nowdata(i,2);
     range_num = find_num(range_tmp,y_label);
     range_rate_num = find_num(range_rate_tmp,x_label);
-    value_table(range_num,range_rate_num) = table(range_num,range_rate_num)*safe_table(range_num,range_rate_num);
+    value_table(range_num,range_rate_num) = table(range_num,range_rate_num);%*safe_table(range_num,range_rate_num);
     num_value = num_value+value_table(range_num,range_rate_num);
 end
 value_table = matrix_process(value_table);
