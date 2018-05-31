@@ -1,4 +1,4 @@
-table = csvread('temp_Pxb.csv');
+ table = csvread('temp_Pxb.csv');
 figure;
 x_label = table(1,:);
 x_label(1)=[];

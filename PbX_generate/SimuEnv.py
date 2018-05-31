@@ -82,6 +82,11 @@ class SimuEnv():
 				x2_list.append(x2)
 				v2_list.append(v2)
 		if savefig == 'on':
+			#print(x1_list)
+			print(x2_list)
+			#print(self.a_back_series)
+			#print(v2_list)
+			#print(v1_list)
 			plt.plot(x1_list)
 			plt.plot(x2_list)
 			plt.plot(v2_list)
@@ -134,16 +139,17 @@ class SimuEnv():
 
 
 
-I = Initial(step = 300,dt = 0.1)
+I = Initial(step = 10,dt = 1)
 env = SimuEnv(initial = I)
 env.setting(1)
 print("hello")
-whole_serie,whole_time = env.start(rlb = 0,rub = 90,rstep = 45,rrlb = -116,rrub = 80,rrstep = 49,random = 'off')
+
+whole_serie,whole_time = env.start(rlb = 0,rub = 98,rstep = 49,rrlb = -20,rrub = -4,rrstep = 40,random = 'off')
 whole_serie.to_csv('NDD_new.csv')
 print("using "+str(whole_time)+" seconds")
 
 env.set_state(100,-17)
 env.simulate(display = 'off',savefig = 'on')
-plt.plot(env.a_back_series)
-plt.legend(labels = ['x1', 'x2','v2','a1'], loc = 'best')
-plt.show()
+#plt.plot(env.a_back_series)
+#plt.legend(labels = ['x1', 'x2','v2','a1'], loc = 'best')
+#plt.show()

@@ -3,12 +3,12 @@ import json
 
 class Initial():
 
-	def __init__(self,step = 30,dt = 1):
+	def __init__(self,step = 10,dt = 1):
 		print("starting initial")
 		self.x_prev = 100
-		self.v_prev = 25
+		self.v_prev = 0
 		self.x_back = 0
-		self.v_back = 10
+		self.v_back = 20
 		self.step = step
 		self.dt = dt
 		self.a_prev_series = [0 for x in range(step)]
@@ -46,8 +46,3 @@ class Initial():
 		return self.a_prev_series[number]
 
 
-
-I = Initial()
-I.save(63)
-I.load(63)
-print("hello,world")

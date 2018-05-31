@@ -6,10 +6,16 @@ import pandas as pd
 
 def pid_follow(x1,v1,x2,v2,k1 = 1.12,k2 = 1.70,amax = 3,amin = -3):
 	headway = 1.4
+	#print(v2)
+	#print(k2)
 	#range_error = x1-x2-headway*v2]
 	range_error = x1-x2-50
 	range_rate_error = v1-v2
-	a = k1*range_error+k2*range_rate_error
+	
+	#print(k1*range_error)
+	#print(1.7*range_rate_error)
+	a = k1*range_error+1.7*range_rate_error
+	print(a)
 
 	return a
 
@@ -63,7 +69,7 @@ def random_effect(a,random_type = 'normal',random_parameter = [0,0.55]):
 		return numpy.round(numpy.random.normal(random_parameter[0],random_parameter[1],1),2)[0]
 
 def pid_follow_with_random(x1,v1,x2,v2,k1 = 1.12,k2 = 1.70,amax = 3,amin = -3,newparameter = [],random = 'on'):
-	a = pid_follow(x1,v1,x2,v2,k1 = k1,k2 = k1,amax = amax,amin = amin)
+	a = pid_follow(x1,v1,x2,v2,k1 = k1,k2 = k2,amax = amax,amin = amin)
 	if random == 'on':
 		theta = 0
 		a = random_effect(a,random_type='normal',random_parameter=[a,theta])

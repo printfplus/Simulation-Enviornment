@@ -9,7 +9,7 @@ global omega;
 omega = 0.2;
 v2 = 20;
 global dt;
-dt = 1;
+dt = 1; 
 global STEP;
 STEP = 10;
 global vmax;
@@ -22,6 +22,8 @@ Pb = 0.03;
 global x_label;
 global y_label;
 global table;
+global threhold;
+threhold = 12;
 
 table = csvread('possibility_table.csv');
 
