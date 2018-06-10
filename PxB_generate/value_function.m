@@ -39,12 +39,7 @@ function [f] = value_function(x)
         a2_list = [a2_list,a2];
         value_list = [value_list,time_interval(car1(1),car2(1),car1(2),car2(2))];
     end
-    f = min(value_list)%+omega*space_punish(x);
-    x1_list
-    x2_list
-    a2_list
-    v2_list
-    %f = min(value_list);%-1000*get_continious_poss(x_label,y_label,table,x(1),x(2));
+    f = min(value_list); 
 end
     
 

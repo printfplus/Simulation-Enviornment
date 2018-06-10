@@ -3,7 +3,8 @@ clc;
 global gate_num;
 gate_num = 100;
 global possi_gate;
-possi_gate = 1e-4;
+possi_gate = 1
+global 
 global v1;
 global v2;
 global omega;
@@ -27,7 +28,7 @@ global y_label;
 [x_label,y_label,possibility_table] = table_read(csvread('NDD_P(x).csv'));
 
 
-imagesc(x_label,y_label,possibility_table);
+imagesc(possibility_table);
 
 global maxp;
 maxp = max(max(possibility_table));
