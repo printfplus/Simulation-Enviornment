@@ -3,7 +3,7 @@
 global possibility_table;
 global x_label;
 global y_label;
-[x_label,y_label,possibility_table] = table_read(csvread('NDD_P(x).csv'));
+[x_label,y_label,possibility_table] = table_read(csvread('6-11cutin_table.csv'));
 global maxp;
 maxp = max(max(possibility_table));
 PBX_table = zeros(size(x_label,1),size(y_label,1));
@@ -28,19 +28,21 @@ global threhold;
 threhold = 12;
 range_label = reshape(x_label,1,size(x_label,1));
 range_rate_label = y_label;
+global possi_gate;
+possi_gate = 1e-6;
 
 for i = 1:size(range_label,2)
     for j = 1:size(range_rate_label,2)
         PBX_table(i,j) = NDD_value_function([range_label(i),range_rate_label(j)]);
         
-        if PBX_table(i,j) >100
-            PBX_table(i,j) = 100;
-       % else
-       %     PBX_table(i,j) = 0;
+        if PBX_table(i,j) == 0
+            PBX_table(i,j) = 1;
+        else
+            PBX_table(i,j) = 0;
         end
             
     end
 end
-imagesc(y_label,x_label,100-PBX_table);
-%csvwrite('PBX.csv',PBX_table);
+imagesc(y_label,x_label,PBX_table);
+%csvwrite('6_11PBX.csv',PBX_table);
         

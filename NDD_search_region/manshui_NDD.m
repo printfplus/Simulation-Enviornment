@@ -9,7 +9,7 @@ function [table] = manshui_NDD(x,y,table)
             tmpx = x+i;
             tmpy = y+j;
             if tmpx > 0 && tmpx <= xsize && tmpy > 0 && tmpy<ysize
-                if NDD_value_function([x_label(tmpx),y_label(tmpy)]) < gate_num && table(tmpx,tmpy) == 0
+                if NDD_value_function([x_label(tmpx),y_label(tmpy)]) <= gate_num && table(tmpx,tmpy) == 0
                     table(tmpx,tmpy) = 1;
                     table = manshui_NDD(tmpx,tmpy,table);
                    

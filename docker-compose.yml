@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  simulation enviornment:
+    image: simulation enviornment
+    build: .
+    ports:
+      - 3000:3000

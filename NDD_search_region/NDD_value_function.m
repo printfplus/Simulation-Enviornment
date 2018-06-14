@@ -4,6 +4,7 @@ function [f] = NDD_value_function(x)
     global x_label;
     global y_label;
     global possi_gate;
+    global gate_num;
     range_value = x(1);
     range_rate_value = x(2);
     range_num = find_num(range_value,x_label);
@@ -12,6 +13,6 @@ function [f] = NDD_value_function(x)
     if possibility_table(range_num,range_rate_num)>possi_gate
         f = value;
     else
-        f = value + 0.1*maxp/(possibility_table(range_num,range_rate_num)+1e-6);
+        f = value + 20*(possi_gate-possibility_table(range_num,range_rate_num));
     end
 end

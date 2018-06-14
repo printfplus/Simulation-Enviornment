@@ -1,9 +1,9 @@
 clear;
 clc;
 global gate_num;
-gate_num = 100;
+gate_num = 0;
 global possi_gate;
-possi_gate = 1e-4;
+possi_gate = 1e-6;
 global v1;
 global v2;
 global omega;
@@ -24,10 +24,11 @@ Pb = 0.03;
 global possibility_table;
 global x_label;
 global y_label;
-[x_label,y_label,possibility_table] = table_read(csvread('NDD_P(x).csv'));
+[x_label,y_label,possibility_table] = table_read(csvread('6-11cutin_table.csv'));
+possi_gate = get_possi_gate(possibility_table,20)
 
 
-imagesc(x_label,y_label,possibility_table);
+imagesc(y_label,x_label,possibility_table);
 
 global maxp;
 maxp = max(max(possibility_table));
@@ -56,20 +57,22 @@ gs = GlobalSearch('FunctionTolerance',10);
 value_table = possibility_table;
 value_table(:,:) = 0;
 
-for i = 1:5
-    i
+for i = 1:50
+    i;
     %[xgs,fval] = run(gs,problem);
     randrange = range_lb+(range_ub-range_lb)*rand(1,1);
     rangerangerate = range_rate_lb+(range_rate_ub-range_rate_lb)*rand(1,1);
     x0 = [randrange,rangerangerate];
-    [xgs,fval] = fmincon(handle,x0,[],[],[],[],LB,UB)
+    [xgs,fval] = fmincon(handle,x0,[],[],[],[],LB,UB);
     xgs = [find_num(xgs(1),x_label),find_num(xgs(2),y_label)];
     value_table = manshui_NDD(xgs(1),xgs(2),value_table);
 end
 %csvwrite('region_data.csv',nowdata)
 [x,y] = meshgrid(x_label,y_label);
-imagesc(x_label,y_label,value_table);
+
 csvwrite('value_table_new2.csv',value_table);
+value_table = final_process(value_table,possibility_table);
+imagesc(y_label,x_label,value_table);
 colorbar;
 f = NDD_value_function(xgs);
 
