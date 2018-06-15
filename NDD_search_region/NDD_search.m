@@ -70,9 +70,9 @@ end
 %csvwrite('region_data.csv',nowdata)
 [x,y] = meshgrid(x_label,y_label);
 
-csvwrite('value_table_new2.csv',value_table);
+
 value_table = final_process(value_table,possibility_table);
 imagesc(y_label,x_label,value_table);
 colorbar;
 f = NDD_value_function(xgs);
-
+csvwrite('value_table_new2.csv',value_table);
