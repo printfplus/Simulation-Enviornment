@@ -27,7 +27,7 @@ threhold = 12;
 
 for i = 1:size(range_label,2)
     for j = 1:size(range_rate_label,2)
-        PBX_table(i,j) = NDD_value_function([range_label(i),range_rate_label(j)]);
+        PBX_table(i,j) = value_function([range_label(i),range_rate_label(j)]);
         if PBX_table(i,j) >100
             PBX_table(i,j) = 1;
         end

@@ -8,7 +8,7 @@ global ylabel;
 [xlabel,ylabel,mytable] = table_read(csvread('6-11cutin_table.csv'));
 global sampling_x0;
 
-sampling_x0 = csvread('x0.csv') ;
+sampling_x0 = csvread('x0.csv');
 table = csvread('value_table_new2.csv');
 
 while (1)

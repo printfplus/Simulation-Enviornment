@@ -33,6 +33,7 @@ for i = 1:size(cut_in_data,1)
     CUT_in_table(range_num,range_rate_num) = CUT_in_table(range_num,range_rate_num)+1;
 end
 CUT_in_table = CUT_in_table/sum(sum(CUT_in_table));
+csvwrite('6-11cutin_table.csv',CUT_in_table);
 figure;
 imagesc(range_rate_list,range_list,CUT_in_table);
 xlabel('range rate','FontSize',15);
