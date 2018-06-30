@@ -56,7 +56,7 @@ gs = GlobalSearch('FunctionTolerance',10);
 
 value_table = possibility_table;
 value_table(:,:) = 0;
-
+minimium_list = [];
 for i = 1:50
     i;
     %[xgs,fval] = run(gs,problem);
@@ -65,6 +65,7 @@ for i = 1:50
     x0 = [randrange,rangerangerate];
     [xgs,fval] = fmincon(handle,x0,[],[],[],[],LB,UB);
     xgs = [find_num(xgs(1),x_label),find_num(xgs(2),y_label)];
+    minimium_list = [minimium_list;[xgs,fval]];
     value_table = manshui_NDD(xgs(1),xgs(2),value_table);
 end
 %csvwrite('region_data.csv',nowdata)
