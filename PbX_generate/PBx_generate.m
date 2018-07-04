@@ -1,4 +1,4 @@
-range_label = 0:2:98;
+range_label = 0:2:90;
 range_rate_label  = -116:4:80;
 PBX_table = zeros(size(range_label,2),size(range_rate_label,2));
 global v1;
@@ -31,14 +31,14 @@ for i = 1:size(range_label,2)
         if PBX_table(i,j) >100
             PBX_table(i,j) = 1;
         end
-       % if PBX_table(i,j) == 0
-       %     PBX_table(i,j) = 1;
-       % else
-       %     PBX_table(i,j) = 0;
-       % end
+        if PBX_table(i,j) == 0
+            PBX_table(i,j) = 1;
+        else
+            PBX_table(i,j) = 0;
+        end
             
     end
 end
 imagesc(y_label,x_label,PBX_table);
-%csvwrite('PBX.csv',PBX_table);
+csvwrite('PBX.csv',PBX_table);
         
