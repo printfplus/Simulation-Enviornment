@@ -1,5 +1,7 @@
 clear;
 clc;
+global crash_possi;
+crash_possi = 0.000852753100000000;
 global gate_num;
 gate_num = 0;
 global possi_gate;
@@ -25,7 +27,7 @@ global possibility_table;
 global x_label;
 global y_label;
 [x_label,y_label,possibility_table] = table_read(csvread('6-11cutin_table.csv'));
-possi_gate = get_possi_gate(possibility_table,20);
+%possi_gate = get_possi_gate(possibility_table,20);
 
 
 imagesc(y_label,x_label,possibility_table);
@@ -72,7 +74,14 @@ end
 [x,y] = meshgrid(x_label,y_label);
 
 
-value_table = final_process(value_table,possibility_table);
+%value_table = final_process(value_table,possibility_table);
+for i = 1:size(value_table,1)
+    for j = 1:size(value_table,2)
+        if value_table(i,j) == 1
+            value_table(i,j) = possibility_table(i,j);
+        end
+    end
+end
 imagesc(y_label,x_label,value_table);
 colorbar;
 f = NDD_value_function(xgs);

@@ -43,5 +43,7 @@ for i = 1:size(mygraph,1)
 end
 imagesc(y_label,x_label,mygraph);
 thirdgraph = mygraph.*possi_table;
+mypossi = sum(sum(thirdgraph));
+thirdgraph = thirdgraph/sum(sum(thirdgraph));
 figure;
 imagesc(y_label,x_label,thirdgraph);
