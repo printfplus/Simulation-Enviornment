@@ -1,5 +1,5 @@
  
-function [f] = value_function(x)
+function [f] = value_function_Switch_ACC(x)
 
     global v1;
     global v2;
@@ -28,9 +28,14 @@ function [f] = value_function(x)
     x2_list = [0];
     a2_list = [];
     v2_list = [];
+    global a_pre;
+    a_pre = 0;
+    global ttc_pre_err;
+    ttc_pre_err = ttc(range,0,v1,v2)-5;
+    
     for i = 1:STEP
         a1 = 0;
-        a2 = FVDM(car1(1),car2(1),car1(2),car2(2));
+        a2 = Switch_ACC(car1(1),car2(1),car1(2),car2(2));
         car1 = update_state(car1(1),car1(2),a1,dt,vmin,vmax);
         car2 = update_state(car2(1),car2(2),a2,dt,vmin,vmax);
         x1_list = [x1_list,car1(1)];
@@ -40,6 +45,9 @@ function [f] = value_function(x)
         value_list = [value_list,time_interval(car1(1),car2(1),car1(2),car2(2))];
     end
     f = min(value_list); 
+    %plot(x1_list);
+    %hold on;
+    %plot(x2_list);
 end
     
 

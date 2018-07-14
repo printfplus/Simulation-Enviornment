@@ -21,7 +21,7 @@ for i = 1:test_time
     range_num = find_num(test_range,x_label);
     range_rate_num = find_num(test_range_rate,y_label);
     my_possi = possi_table(range_num,range_rate_num);
-    test_value = value_function_IDM([test_range,test_range_rate]);
+    test_value = value_function_Switch_ACC([test_range,test_range_rate]);
     if test_value == 0
         tmp_possi = 1;
     else

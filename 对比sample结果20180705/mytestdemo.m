@@ -2,11 +2,14 @@
 possi = 0;
 for i = 1:size(possi_table,1)
     for j = 1:size(possi_table,2)
-        tmp_value = value_function([x_label(i),y_label(j)]);
+        tmp_value = value_function_IDM([x_label(i),y_label(j)]);
         if tmp_value == 0
             possi = possi + possi_table(i,j);
+            possi_table(i,j) = 1;
         end
+        
     end
 end
+imagesc(possi_table);
 
         

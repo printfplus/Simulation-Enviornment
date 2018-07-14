@@ -1,6 +1,6 @@
 [xlabel,ylabel,mytable] = table_read(csvread('6-11cutin_table.csv'));
 mytable(:,:) = 0;
-for i = 1:100000
+for i = 1:10000
     i
     [tmp_range,tmp_range_rate] = sampling_using_NDD();
     tmp_range_num = find_num(tmp_range,xlabel);

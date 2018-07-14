@@ -1,0 +1,14 @@
+%value_table_process;
+%value_region_generate_sampling_library;
+%value_region_test;
+load('NDD_IDM_list.mat');
+NDD_list = collision_rate_list;
+load('value_region_IDM_list.mat');
+value_list = collision_rate_list(1:1000);
+NDD_x = 1:100000;
+value_x = 1:1000;
+plotyy(NDD_x,NDD_list,value_x,value_list');
+legend('NDD','Value Region');
+xlabel('Test Time','FontSize',15);
+ylabel('Collision Rate','FontSize',15);
+set(gca,'linewidth',2,'FontName','Times New Roman','FontSize',14);

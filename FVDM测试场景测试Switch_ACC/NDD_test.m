@@ -1,7 +1,7 @@
 load('NDD_library.mat');
 NDD_table = value_library;
 item_num = size(NDD_table,1);
-test_time = 100000;
+test_time = 200000;
 collision_time = 0;
 collision_rate_list = [];
 [x_label,y_label,possi_table] = table_read(csvread('6-11cutin_table.csv'));
@@ -16,7 +16,7 @@ for i = 1:test_time
     range_num = find_num(test_range,x_label);
     range_rate_num = find_num(test_range_rate,y_label);
     my_possi = possi_table(range_num,range_rate_num);
-    test_value = value_function_IDM([test_range,test_range_rate]);
+    test_value = value_function_Switch_ACC([test_range,test_range_rate]);
     if test_value == 0
         tmp_possi = 1;
     else

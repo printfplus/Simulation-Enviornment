@@ -1,5 +1,5 @@
  
-function [f] = value_function(x)
+function [f] = value_function_IDM(x)
 
     global v1;
     global v2;
@@ -30,7 +30,7 @@ function [f] = value_function(x)
     v2_list = [];
     for i = 1:STEP
         a1 = 0;
-        a2 = FVDM(car1(1),car2(1),car1(2),car2(2));
+        a2 = IDM(car1(1),car2(1),car1(2),car2(2));
         car1 = update_state(car1(1),car1(2),a1,dt,vmin,vmax);
         car2 = update_state(car2(1),car2(2),a2,dt,vmin,vmax);
         x1_list = [x1_list,car1(1)];
